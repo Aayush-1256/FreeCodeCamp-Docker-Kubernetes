@@ -1,1 +1,103 @@
+Docker Course Overview
+
+Take website and api then use Docker to package up these thing and run 
+Docker helps to create a package of what you create locally and runs it on a any server having docker runtime env
+
+Docker : 
+1. Docker is a tool for running applications in isolated env
+2. It is similar to Virtual Machine
+3. Apps run in same env
+4. Now everyone is adapting Docker as Standard for Software Deployment
+
+Containers : 
+These are an abstraction at app layer that packages code and dependencies together.
+Multiple containers can run on same machine and share the OS Kernel with other container and each running as isolated processess in user space
+
+Virtual Machines :
+VMs are an abstraction of physical hardware turning one server to multiple servers.
+THe hypervisor allows multiple VM's to run on single machine.
+Each vm includes a full copy of an operating system , the application and necessary binaries and libraries - taking tens of GBs
+Vm are also very slow to boot
+
+
+
+Benefits of Docker:
+1. Run container in seconds intead of min
+2. Less resources results less disk space
+3. Uses less memory
+4. Doesn't need full OS
+5. Deployment is easy
+
+Docker Image
+1. Image is a template for creating an env of your choice
+2. Snapshot (Image can have different version)
+3. It has everyhthng to run image OS , Code etc..
+
+Container
+1. It is a running instance of Image
+
+To explore and download images you can try docker hub 
+
+To download the image use 
+$ docker pull nginx
+
+To list images 
+$ docker images
+
+Running a Container from Image
+$ docker run nginx:(tag)
+Using the above command will not allow further commands in same terminal untill the container gets stopped
+
+Running a Container in a Detach Mode (Run COntainer in Background)
+$ docker run -d nginx:(tag)
+
+
+List running container
+$ docker container ls
+$ docker ps
+Both are for same
+
+To stop a docker container
+$ docker stop (container-id)
+$ docker stop (name-of-container)
+
+To map the local pc port to docker container port and run the container
+$ docker run -d -p (local-port):(container-port) nginx:(tag)
+example: docker run -d -p 8080:80 nginx:latest
+
+Mapping multiple localhost post with container port and run container
+$ docker run -d -p (local-port):(container-port) -p (local-port):(container-port) -p (local-port):(container-port) ... nginx:(tag)
+example: docker run -d -p 8080:80 -p 3000:80 -p 5000:80 nginx:tag
+
+To start a container 
+$ docker start (container-id)
+$ docker start (container-name)
+
+List of container all containers
+$ docker ps -a
+
+Delete a container 
+$ docker rm (container-id)
+$ docker rm (container-name)
+
+Delete all containers
+$ docker rm $(docker ps -aq)
+
+here $(docker ps -aq) 
+a stands for all 
+q stands to output only numeric id
+
+The command will give all conatiners id and all of them will be deleted
+
+To stop a running container
+$ docker rm -f (container-id)
+
+To delete all container running or stopped..
+$  docker rm -f $(docker ps -aq) 
+  
+
+
+
+
+
 
