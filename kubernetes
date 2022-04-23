@@ -1,1 +1,11 @@
+Kubernetes Overview:
+
+When we have a complex appps with tens and hundreds of containers 
+These container interact with each other in some way
+It is very difficult to manually interfere if any problem occur
+This is where Kubernetes works as a Container Orchestrator and helps 
+
+Kubernetes:
+
+
 
