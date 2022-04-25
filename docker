@@ -94,9 +94,67 @@ $ docker rm -f (container-id)
 
 To delete all container running or stopped..
 $  docker rm -f $(docker ps -aq) 
-  
+
+TO name a container as per our choice
+$ docker run --name (name-of-container) -d -p 8080:80 nginx:latest
+
+Sometimes docker ps shows details in a bit awkard way so to make it easy to read we use 
+$ docker ps --format="ID\t{{.ID}}\nNAME\t{{.Names}}\nIMAGE\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"
+
+Volumes in Docker
+1. Volumes allows to share files and folders between host(server/local pc) and container
+2. Also volumes allows to share between containers
+
+Suppose we have a container so now to share between container and host
+1. We will create a volume inside a container
+2. And if we have a file in host in that volume so that will also appear in container as well
+3. It is like we create a link between a directory or a file in host and in container 
+4. So if we made changes in container in that folder the changes will be visible in host and vice versa
+
+$ docker run --name website -v /path/of/source/in/host:/path/of/target/in/container:ro  -d -p 8080:80 nginx
+
+-v -> volume
+ro -> read only container won't be able to edit or create new file inside this volume
+
+To get inside a container or like to run a bash/terminal cmd inside a container
+$ docker exec -it (name-of-container/container-id) bash
 
 
+To create a volume with both read and write
+
+$ docker run --name website -v /path/of/source/in/host:/path/of/target/in/container  -d -p 8080:80 nginx
+
+
+Sharing Volumes Between Containers
+Let a container named website is already running and we want to share its contents with other container 
+
+$ docker run --name website-copy --volumes-from website -d -p 8081:80 nginx
+
+This will create a exact copy of files from one container to another
+
+
+Dockerfile :
+Building our own image from creating file called DockerFile
+
+Link for reference : https://docs.docker.com/engine/reference/builder/
+
+1. Image is a template for creating an env of your choice
+2. Snapshot
+3. Has everything need to run your Apps
+4. OS,Software,App Code
+
+For creating a Dockerfile
+1. Inside of root folder(folder whose all contents you need in dockerfile) create a file named Dockerfile
+2. FROM nginx:latest (From refers to the base image you need can be ubuntu,nginx,mysql etc..)
+3. ADD . /usr/share/nginx/html (Here . refers to all contents in current directory ADD them to /usr/share/nginx/html)
+4. Now to build dockerfile 
+   $ docker build --tag/-t website:(tag-name like latest) /path/of/Folder/which/consist-of/dockerfile
+   If you are in the folder which consitst of dockerfile then
+   $ docker build --tag/-t website:(tag-name like latest) .
+   
+   
+   
+   
 
 
 
