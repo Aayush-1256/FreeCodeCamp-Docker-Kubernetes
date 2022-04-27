@@ -153,8 +153,49 @@ For creating a Dockerfile
    $ docker build --tag/-t website:(tag-name like latest) .
    
    
-   
-   
+Creating a .dockerignore
+
+Sometimes we doesn't need files to be a part of image that are currently present in folder we are creating Dockerfile
+For this we use the .dockerignore file
+
+Example: .dockerignore
+node_modules
+app/userdata
+.git
+*.txt
+*.config
+Dockerfile
+
+
+ALPINE :
+ALPINE can be used to create images in docker which helps to create low size images
+Most of the docker images have an alpine verison of it
+
+For ex : docker pull node:lts-alpine
+lts -> latest
+
+Alpine tag can be different for different images
+
+Check it on docker hub website
+
+Can also try to use only alpine tag to fetch latest image
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
