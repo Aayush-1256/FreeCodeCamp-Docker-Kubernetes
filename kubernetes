@@ -6,6 +6,64 @@ It is very difficult to manually interfere if any problem occur
 This is where Kubernetes works as a Container Orchestrator and helps 
 
 Kubernetes:
+It is a open source container orchestration tool
+Developed by google
+Helps you manage containerized applications in different deployment enviroments
+
+What Problem does K8 solve:
+1. Rise of microservices change the trend from monolith to microservices
+2. Increased usage of containers
+3. It demanded a proper way to manage those containers
+
+K8 Features:
+1 High availabitlity / no donwtime
+2. Scalability / High Performance
+3. Disaster Recovery / Backup & Restore
+
+K8 Architecture
+1. It has one master node and many slaves/worker nodes running kubelet(its a k8 process which helps to run tasks in container)
+2. Master Node runs several k8 process imp to run cluster properly
+3. Some master node processes -> 1. API Server to run command on k8
+                                 2. Controller manager to keep track of whats happening in cluster
+                                 3. Scheduler is responsible for scheduling container on nodes based on availability and load contaniner needs
+                                 4. etcd Key value storage which holds configuration data and nodes status data 
+                               
+POD (part of k8) :
+1. Smallestest unit of k8
+2. It creates a abstraction over container as we will use this only to use docker container
+3. Usually 1 app per pod
+4. Each pod gets an private ip with which it can connect to other pods
+5. If the container gets stopped / crashed then the pod gets a new ip which can be incovient as ip gets changes and
+   because of this one more part of k8 Service and Ingress is used
+   
+Service and Ingress:
+1. It is used to attach a static/permanaet ip to a pod
+2. Even if container crash service ip remains same
+3. Service is of 2 types External and Internal Service
+   1. External Service : It allows external services to connect or access website
+   2. Internal Service : It allows internal services to connect or access website
+4. Service has ip but when we access website we need a domain name so here ingress comes above service and forward request to ip if made to ingrees
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
 
 
 
