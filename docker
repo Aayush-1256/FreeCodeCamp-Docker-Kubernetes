@@ -181,7 +181,15 @@ Check it on docker hub website
 Can also try to use only alpine tag to fetch latest image
 
 
+Getting complete information of a container
+$ docker inspect (container-id/container-name)
 
+
+Getting all logs of a container
+$ docker logs (container-id)
+
+Getting logs in realtime 
+$ docker logs -f (container-d)
 
 
 
