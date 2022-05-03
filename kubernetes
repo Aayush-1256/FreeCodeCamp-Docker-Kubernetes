@@ -31,7 +31,7 @@ K8 Architecture
 POD (part of k8) :
 1. Smallestest unit of k8
 2. It creates a abstraction over container as we will use this only to use docker container
-3. Usually 1 app per pod
+3. Usually 1 app per pod but can run multiple container
 4. Each pod gets an private ip with which it can connect to other pods
 5. If the container gets stopped / crashed then the pod gets a new ip which can be incovient as ip gets changes and
    because of this one more part of k8 Service and Ingress is used
@@ -43,6 +43,92 @@ Service and Ingress:
    1. External Service : It allows external services to connect or access website
    2. Internal Service : It allows internal services to connect or access website
 4. Service has ip but when we access website we need a domain name so here ingress comes above service and forward request to ip if made to ingrees
+
+
+Config Map and Secret
+
+Suppose we have a app and db contianer and it uses ip and cred to connect to DB that are stored in some file
+If those get changes we need to rebuild the container and deploy it on server so can be bit tedious for this small task
+
+Here comes the CofigMap
+It is a external configuration of app;ication like url of databases or some other service
+And in k8 we connect ConfigMap with Pod and Pod gets data that ConfigMap contains
+But storing passwords and username in configmap in text form is not good 
+So here comes Secret and is just like ConfigMap
+and is used to store secret data like cred and it stores them in base64 encoded
+Similar to ConfigMap we can connect Secret with pod and pod can use those creddentials
+We can use the values from ConfigMap and Secret insdie the Pod
+By using them as envirnment variables or as properties files
+
+Volumes:
+Suppose we have a db container and if container gets restart all data that would be written after running of contsiner would be gone
+Here we use Volumes
+We attach a local or remote(not part of k8 cluster) storage to that container
+Now if container gets restarted all data will be saved
+
+
+Deployment and Stateful Set:
+Suppose our applicaiton is running fine and our app-container dies and site can't be reached
+So instead of relying on 1 app and db container/pod we replicate same onto another server
+And this replica is connected to Service
+As Service is permanent ip and also it works as a load balancer
+So it one dies it can send request to another one
+
+Inorder to create a second replica we would not create a new POD
+But we will define a blueprint for app pod and how many replica we want
+That blueprint is called deployment
+In Practice we don't work on POD instead we create/use Deployment
+Because in Deployment we can specify replica and we can scale up or scale down the replica we neeed
+Deployment is a abstraction layer above PODS
+So in practice we use Deploymnet other than PODS
+
+So these Deployment we only use for App and other stuff too but not for DB
+As if we have multiple db container with one shared volume/storage then we don't know which one is writing and reading and
+Because of this there can be data inconsistency
+
+This is where we use StatefulSet
+THis is used for all stateful/db apps like mysql , mongo etc..
+
+Deployment is for StateLess Apps
+StateFul is for StateFull Apps
+
+Deploying Statefulset is not easy and is more difficult than using deployment
+
+So mostly we host DB outside of k8 cluster 
+
+
+Main K8 Components Summarized:
+1. Pods : Abstraction of Container
+2. Service : Communication
+3. Ingress : Route traffic to cluster
+4. ConfigMap and Secrets : external configuration
+5. Volumes : Data persistance
+6. Deployment and StateFulSet : Pod blueprint with replicating mechanism 
+                                Deployment is used for Stateless apps and Statefulset is used for StateFull apps like db 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
