@@ -122,6 +122,11 @@ To create Pod , Service , Secret , ConfigMap etc on Node(Node is a server) we us
 Its a cli tool for k8 cluster
 KubeCTL can be used for any type of k8 cluster
 
+MiniKUBE require some hypervisor installed as it create a virtual machine inside the local
+Also MiniKube has Kubectl as a dependency
+So installing minikube also installs kubectl
+
+
 
 
 
