@@ -106,10 +106,21 @@ Main K8 Components Summarized:
 6. Deployment and StateFulSet : Pod blueprint with replicating mechanism 
                                 Deployment is used for Stateless apps and Statefulset is used for StateFull apps like db 
 
+MiniKube:
+If we want to test something in local machine we use Open Source MiniKube
+It's a one node cluster
+In this both master and workers/node processes run on one machine
+Also worker/node processes have docker pre installed
+It actually creates a virtual box on local
+And Node runs in that Virtual box
+Its a 1 Node k8 cluster
+And is used for testing purposes
 
 
-
-
+KubeCTL:
+To create Pod , Service , Secret , ConfigMap etc on Node(Node is a server) we use kubectl
+Its a cli tool for k8 cluster
+KubeCTL can be used for any type of k8 cluster
 
 
 
